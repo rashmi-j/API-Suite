@@ -1,26 +1,33 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+# Use a package of configuration called an orb.
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+  petstoreAPITests:
     docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+      # specify the version you desire here
+      - image: maven:3.6.3-adoptopenjdk-8
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+          name: Run Petstore Tests 1
+          command: |
+            mvn --quiet clean test -DsuiteXmlFile=testng.xml
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/petstore-api-tests/
+            mkdir -p ~/test-output/
+            find . -type f -regex "./target/surefire-reports/junitreports/.*xml" -exec cp {} ~/test-results/petstore-api-tests/ \;
+            find . -type f -regex "./target/surefire-reports/TEST-TestSuite.xml" -exec cp {} ~/test-output/ \;
+            find . -type f -regex "./target/surefire-reports/emailable-report.html" -exec cp {} ~/test-output/ \;
+          when: always
+      - store_test_results:
+          path: ~/test-results
+      - store_artifacts:
+          path: ~/test-output
 workflows:
-  say-hello-workflow:
+  # Name the workflow "petStoreApiPipeline"
+  petStoreApiPipeline:
+    # Run pet store tests
     jobs:
-      - say-hello
+      - petstoreAPITests
