@@ -8,19 +8,17 @@ public class Pets {
 
     static Loadconfig lf;
 
-    public static Response getPetById(String petId, int statusCode){
-
+    public static Response getPetByID(String petID, int statusCode) {
         lf = new Loadconfig();
 
-        String endPoint = lf.HOST+"/pet"+petId;
+        String endPoint = lf.HOST + "/pet/" + petID;
 
         Response response = given().log().ifValidationFails()
-                .header("Content-Type","application.json")
+                .header("Content-Type", "application/json")
                 .when().get(endPoint)
-                .then().assertThat().statusCode(statusCode)
-                .extract().response();
-
+                .then().assertThat().statusCode(statusCode).extract().response();
         return response;
+
     }
 
     public static Response getPetStatus(String status, int statusCode){

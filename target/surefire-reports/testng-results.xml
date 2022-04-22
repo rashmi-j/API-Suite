@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="All Test Suite" duration-ms="5355" started-at="2022-04-22T11:31:50Z" finished-at="2022-04-22T11:31:56Z">
+    <groups>
+    </groups>
+    <test name="/Users/rashmi.j/Documents/API-Suite/src/test/java/com/api/tests/PetTest.java" duration-ms="5355" started-at="2022-04-22T11:31:50Z" finished-at="2022-04-22T11:31:56Z">
+      <class name="com.api.tests.PetTest">
+        <test-method status="PASS" signature="createNewPetAndVerify()[pri:0, instance:com.api.tests.PetTest@15975490]" name="createNewPetAndVerify" duration-ms="2852" started-at="2022-04-22T17:01:50Z" description="Create new pet and verify the creation" finished-at="2022-04-22T17:01:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNewPetAndVerify -->
+        <test-method status="PASS" signature="verifyPetByID()[pri:0, instance:com.api.tests.PetTest@15975490]" name="verifyPetByID" duration-ms="2489" started-at="2022-04-22T17:01:53Z" description="Verify pet by id" finished-at="2022-04-22T17:01:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyPetByID -->
+      </class> <!-- com.api.tests.PetTest -->
+    </test> <!-- /Users/rashmi.j/Documents/API-Suite/src/test/java/com/api/tests/PetTest.java -->
+  </suite> <!-- All Test Suite -->
+</testng-results>

@@ -38,16 +38,18 @@ Date date;
 
     @Test (description = "Verify pet by id")
     public void verifyPetByID(){
-        date = new Date();
-        String name = "Kitto"+date.getTime();
+        Date d = new Date();
+        String name = "Kitto"+d.getTime();
         JSONObject requestBody=  JsonUtils.getJsonFileObj("src/main/resources/createNewPet.json");
         requestBody.put("name", name);
 
 
+        System.out.println(requestBody.toString());
+
         Response response = Pets.createNewPet(requestBody.toString(), 200);
         String idOfPet = response.jsonPath().get("id").toString();
 
-        Response resp = Pets.getPetById(idOfPet, 200);
+        Response resp = Pets.getPetByID(idOfPet, 200);
         Assert.assertEquals(name, resp.jsonPath().get("name"));
     }
 
