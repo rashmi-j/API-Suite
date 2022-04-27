@@ -21,18 +21,16 @@ public class Pets {
 
     }
 
-    public static Response getPetStatus(String status, int statusCode){
-
+    public static Response getPetStatus(int statusCode, String status) {
         lf = new Loadconfig();
 
-        String endPoint = lf.HOST+"/pet/findByStatus?status=available";
+        String endPoint = lf.HOST + "/pet/findByStatus?status=available";
 
         Response response = given().log().ifValidationFails()
-                .header("Content-Type","application.json")
+                .header("Content-Type", "application/json")
                 .when().get(endPoint)
                 .then().assertThat().statusCode(statusCode)
                 .extract().response();
-
         return response;
     }
 
