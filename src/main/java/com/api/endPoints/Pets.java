@@ -2,6 +2,9 @@ package com.api.endPoints;
 
 import com.api.utils.Loadconfig;
 import com.jayway.restassured.response.Response;
+
+import java.io.File;
+
 import static com.jayway.restassured.RestAssured.given;
 
 public class Pets {
@@ -62,4 +65,17 @@ public class Pets {
                 .assertThat().statusCode(statusCode).extract().response();
         return response;
     }
+
+    public static Response uploadPetImage(String petId, String filePath, int statusCode){
+
+        String endPoint = lf.HOST +"/pet/"+petId+"/uploadImage";
+
+        Response response = given().log().ifValidationFails().header("ContentType","multipart/form-data")
+                .accept("application/json")
+                .multiPart("file",new File(filePath))
+                .when().post(endPoint)
+                .then().assertThat().statusCode(statusCode).extract().response();
+        return response;
+    }
+
 }

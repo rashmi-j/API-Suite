@@ -94,6 +94,25 @@ Date date;
         /*** Update api test assertions***/
 
     }
+
+    @Test (description = "verify updating pet image")
+    public void updatePetImage(){
+
+        Date d = new Date();
+        String name = "Kitto"+d.getTime();
+        JSONObject requestBody = JsonUtils.getJsonFileObj("src/main/resources/CreateNewpetWithoutImage.json");
+        requestBody.put("name",name);
+
+        Response createResponse = Pets.createNewPet(requestBody.toString(),200);
+        String petId = createResponse.jsonPath().get("id").toString();
+
+        Response updateResponse = Pets.uploadPetImage(petId,"src/test/resources/Kitty.jpg",200 );
+        /** checkout how to add image under resources , if its img url or actual img**/
+
+        Response getPet = Pets.getPetByID(petId, 200);
+        Assert.assertFalse(getPet.jsonPath().get("photoUrls").toString().isEmpty());
+
+    }
 }
 
 
