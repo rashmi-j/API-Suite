@@ -106,7 +106,7 @@ Date date;
         Response createResponse = Pets.createNewPet(requestBody.toString(),200);
         String petId = createResponse.jsonPath().get("id").toString();
 
-        Response updateResponse = Pets.uploadPetImage(petId,"src/test/resources/Kitty.jpg",200 );
+        Response updateResponse = Pets.uploadPetImage(petId,"src/main/resources/Kitty.jpg",200 );
         /** checkout how to add image under resources , if its img url or actual img**/
 
         Response getPet = Pets.getPetByID(petId, 200);

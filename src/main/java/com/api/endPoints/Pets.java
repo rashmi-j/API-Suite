@@ -70,7 +70,7 @@ public class Pets {
 
         String endPoint = lf.HOST +"/pet/"+petId+"/uploadImage";
 
-        Response response = given().log().ifValidationFails().header("ContentType","multipart/form-data")
+        Response response = given().log().ifValidationFails().header("Content-Type","multipart/form-data")
                 .accept("application/json")
                 .multiPart("file",new File(filePath))
                 .when().post(endPoint)

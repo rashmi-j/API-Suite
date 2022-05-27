@@ -1,11 +1,13 @@
 package com.api.endPoints;
 
 import com.api.utils.Loadconfig;
+import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;
 
 import static com.jayway.restassured.RestAssured.given;
 
 public class Users {
+    static Loadconfig lf = new Loadconfig();
 
     public static Response createUserWithArray(String reqBody, int statusCode){
         Loadconfig lf = new Loadconfig();
@@ -29,19 +31,26 @@ public class Users {
         return response;
     }
 
-    public static Response getUser(String userName,int statusCode){
-        Loadconfig lf = new Loadconfig();
 
-        String endPoint = lf.HOST+"/user"+userName;
-        Response response = given().log().ifValidationFails().header("Content-Type","application/json")
+    public static Response getUser(String userName, int statusCode){
+
+        String endPoint = lf.HOST+"/user/"+userName;
+
+        Response response = given().log().ifValidationFails()
+                .header("Content-Type","application/json")
                 .accept("application/json")
                 .when().get(endPoint)
-                .then().assertThat().statusCode(statusCode).extract().response();
+                .then().
+                assertThat()
+                .statusCode(statusCode).extract().response();
+
         return response;
+
     }
 
+
     public static Response updateUser(String userName, String reqBody, int statusCode){
-        Loadconfig lf = new Loadconfig();
+        //Loadconfig lf = new Loadconfig();
 
         String endPoint = lf.HOST+"/user"+userName;
         Response response = given().log().ifValidationFails().header("Content-Type","application/json")
@@ -86,7 +95,7 @@ public class Users {
         Loadconfig lf = new Loadconfig();
 
         String endPoint = lf.HOST+"/user";
-
+        System.out.println(reqBody);
         Response response = given().log().ifValidationFails()
                 .header("Content-Type","application/json")
                 .accept("application/json").body(reqBody)
