@@ -49,4 +49,4 @@
 
 ![img_1.png](img_1.png)
 
-![img_2.png](img_2.png)
+<img width="1162" alt="image" src="https://user-images.githubusercontent.com/23716822/170676357-e8290d5f-dc16-43b6-8782-662c8ca66d58.png">
